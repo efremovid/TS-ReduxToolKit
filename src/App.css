@@ -1,0 +1,6 @@
+.content {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  block-size: 100%;
+  min-block-size: 100dvh;
+}
