@@ -1,9 +1,23 @@
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/Button/Button";
+import Cards from "../../components/Cards/Cards";
 import styles from "./Products.module.scss"
 
 const Products = () => {
-  return (
-    <div className={styles.container}>Products</div>
-  )
-}
+  const navigate = useNavigate();
 
-export default Products
+  const handleClick = () => {
+    navigate(-1);
+  };
+
+  return (
+    <div className={styles.container}>
+      <Button onClick={handleClick} widthVariant={"big"}>
+        Назад
+      </Button>
+      <Cards />
+    </div>
+  );
+};
+
+export default Products;

@@ -3,9 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import Products from "../../pages/Products/Products";
 import Product from "../../pages/Product/Product";
-import type { JSX } from "react";
 
-function Main(): JSX.Element {
+function Main() {
   return (
     <div>
       <Routes>
