@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
 import styles from "./Styles.module.scss";
-import { selectProducts } from "../../store/products/products-selectors";
 import Card from "../Card/Card";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../store/products/products-selectors";
 
 const Cards = () => {
   const products = useSelector(selectProducts);

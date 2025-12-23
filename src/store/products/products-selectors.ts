@@ -1,4 +1,4 @@
 import type { RootState } from "..";
+import type { ShortProductLocal } from "../../types";
 
-
-export const selectProducts = (state: RootState) => state.products;
+export const selectProducts = (state: RootState): ShortProductLocal[] => state.products;

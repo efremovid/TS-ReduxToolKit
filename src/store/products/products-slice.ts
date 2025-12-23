@@ -1,22 +1,24 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { ShortProduct } from "../../types";
+import type { ShortProductLocal } from "../../types";
 
-export const initialState: ShortProduct[] = [];
+export const initialState: ShortProductLocal[] = [];
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    getProducts: (_, action: PayloadAction<ShortProduct[]>) => {
-        return action.payload
+    setProducts: (_, action: PayloadAction<ShortProductLocal[]>) => {
+      return action.payload;
     },
-    //   getProducts: (state, action: PayloadAction<ShortProduct[]>) => {
-    //     state = action.payload
-    // },
+    toggleLike: (state, action: PayloadAction<number>) => {
+      return state.map((el) =>
+        el.id === action.payload ? { ...el, like: !el.like } : el
+      );
+    },
+
+
   },
 });
 
-export const { getProducts } = productsSlice.actions;
+export const { setProducts, toggleLike,} = productsSlice.actions;
 export const productsReducer = productsSlice.reducer;
-
-// dispatch(getProducts(data));

@@ -4,12 +4,13 @@ import Footer from "./layout/Footer/Footer";
 import Header from "./layout/Header/Header";
 import Main from "./layout/Main/Main";
 import { apiProducts } from "./utils/apiProducts";
-import { getProducts } from "./store/products/products-slice";
-import type { ShortProduct } from "./types";
+import { setProducts } from "./store/products/products-slice";
+import type { ShortProductBase } from "./types";
 import { useDispatch } from "react-redux";
+import { refactorProductsData } from "./utils/refactorProductsData";
 
-interface ApiResponse {
-  products: ShortProduct[];
+interface ApiData {
+  products: ShortProductBase[];
   total: number;
   skip: number;
   limit: number;
@@ -18,11 +19,10 @@ interface ApiResponse {
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    apiProducts().then((data: ApiResponse) =>
-      dispatch(getProducts(data.products))
+    apiProducts().then((data: ApiData) =>
+      dispatch(setProducts(refactorProductsData(data.products)))
     );
   }, []);
-
 
   return (
     <div className="content">
