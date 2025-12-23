@@ -15,10 +15,8 @@ const productsSlice = createSlice({
         el.id === action.payload ? { ...el, like: !el.like } : el
       );
     },
-
-
   },
 });
 
-export const { setProducts, toggleLike,} = productsSlice.actions;
+export const { setProducts, toggleLike } = productsSlice.actions;
 export const productsReducer = productsSlice.reducer;

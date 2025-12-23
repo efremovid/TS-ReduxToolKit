@@ -2,8 +2,33 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import Cards from "../../components/Cards/Cards";
 import styles from "./Products.module.scss";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { ShortProductBase } from "../../types";
+import { setProducts } from "../../store/products/products-slice";
+import { refactorProductsData } from "../../utils/refactorProductsData";
+import { selectProducts } from "../../store/products/products-selectors";
+import { apiProducts } from "../../utils/apiProducts";
+
+interface ApiData {
+  products: ShortProductBase[];
+  total: number;
+  skip: number;
+  limit: number;
+}
 
 const Products = () => {
+  const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(0);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    apiProducts(10, page).then((data: ApiData) =>
+      dispatch(setProducts(refactorProductsData(data.products)))
+    );
+  }, [page]);
+
+  const products = useSelector(selectProducts);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -17,10 +42,22 @@ const Products = () => {
       </Button>
       <div className={styles.filter}>
         <p>Фильтрация:</p>
-        <Button widthVariant={"big"}>All</Button>
-        <Button widthVariant={"big"}>Liked</Button>
+        <Button onClick={() => setFilter("all")} widthVariant={"big"}>
+          All
+        </Button>
+        <Button onClick={() => setFilter("liked")} widthVariant={"big"}>
+          Liked
+        </Button>
       </div>
-      <Cards />
+      <Cards filter={filter} />
+
+      <div>
+        {products.map((el, index) => (
+          <button onClick={() => setPage(index + 1)} key={el.id}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

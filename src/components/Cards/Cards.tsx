@@ -1,10 +1,17 @@
 import styles from "./Styles.module.scss";
 import Card from "../Card/Card";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../../store/products/products-selectors";
+import { selectFilterProducts } from "../../store/products/products-selectors";
+import type { RootState } from "../../store";
 
-const Cards = () => {
-  const products = useSelector(selectProducts);
+interface CardsProps {
+  filter: string;
+}
+
+const Cards = ({ filter }: CardsProps) => {
+  const products = useSelector((state: RootState) =>
+    selectFilterProducts(state, filter)
+  );
 
   return (
     <div className={styles.container}>
