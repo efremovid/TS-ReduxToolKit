@@ -4,3 +4,8 @@ export const apiProducts = (limit: number, page: number) => {
   ).then((response) => response.json());
 };
 
+export const apiProduct = (id: number) => {
+  return fetch(`https://dummyjson.com/products/${id}`).then((response) =>
+    response.json()
+  );
+};

@@ -51,9 +51,14 @@ const Products = () => {
       </div>
       <Cards filter={filter} />
 
-      <div>
+      <div className={styles.pages}>
         {products.map((el, index) => (
-          <button onClick={() => setPage(index + 1)} key={el.id}>
+          <button 
+          style={index+1 === page ? {color: 'red'} : {color: 'black'}}
+            className={styles.btn}
+            onClick={() => setPage(index + 1)}
+            key={el.id}
+          >
             {index + 1}
           </button>
         ))}
