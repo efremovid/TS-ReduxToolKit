@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import type { ShortProductBase } from "../../types";
 import { setProducts } from "../../store/products/products-slice";
 import { refactorProductsData } from "../../utils/refactorProductsData";
-import { selectProducts } from "../../store/products/products-selectors";
+
 import { apiProducts } from "../../utils/apiProducts";
+import { selectProducts } from "../../store/products/products-selectors";
 
 interface ApiData {
   products: ShortProductBase[];
@@ -19,20 +20,25 @@ interface ApiData {
 
 const Products = () => {
   const [filter, setFilter] = useState("");
-  const [page, setPage] = useState(0);
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    apiProducts(10, page).then((data: ApiData) =>
-      dispatch(setProducts(refactorProductsData(data.products)))
-    );
-  }, [page]);
-
   const products = useSelector(selectProducts);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      apiProducts().then((data: ApiData) =>
+        dispatch(setProducts(refactorProductsData(data.products)))
+      );
+    }
+  }, []);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(-1);
+    navigate("/");
+  };
+
+  const goToProduct = () => {
+    navigate("/products/create-product");
   };
 
   return (
@@ -48,21 +54,24 @@ const Products = () => {
         <Button onClick={() => setFilter("liked")} widthVariant={"big"}>
           Liked
         </Button>
+        <Button onClick={goToProduct} widthVariant={"big"}>
+          CREATE NEW PRODUCT!
+        </Button>
       </div>
       <Cards filter={filter} />
 
-      <div className={styles.pages}>
-        {products.map((el, index) => (
-          <button 
-          style={index+1 === page ? {color: 'red'} : {color: 'black'}}
-            className={styles.btn}
-            onClick={() => setPage(index + 1)}
-            key={el.id}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      {/* <div className={styles.pages}>
+          {products.map((el, index) => (
+            <button 
+            style={index+1 === page ? {color: 'red'} : {color: 'black'}}
+              className={styles.btn}
+              onClick={() => setPage(index + 1)}
+              key={el.id}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div> */}
     </div>
   );
 };

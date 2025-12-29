@@ -1,0 +1,73 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.loader {
+  text-align: center;
+  font-size: 20px;
+  padding: 40px;
+}
+
+.main {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.image {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.info {
+  flex: 1;
+}
+
+.category {
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.description {
+  margin: 16px 0;
+  line-height: 1.5;
+}
+
+.priceBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.discount {
+  color: red;
+  font-weight: 600;
+}
+
+.extra {
+  border-top: 1px solid #eee;
+  padding-top: 24px;
+}
+
+.review {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.reviewName {
+  font-weight: 600;
+}
+
+.buttonBack {
+    margin-bottom: 20px;
+}

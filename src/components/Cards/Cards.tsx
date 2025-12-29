@@ -13,6 +13,8 @@ const Cards = ({ filter }: CardsProps) => {
     selectFilterProducts(state, filter)
   );
 
+  console.log(products)
+
   return (
     <div className={styles.container}>
       {products.map((product) => (

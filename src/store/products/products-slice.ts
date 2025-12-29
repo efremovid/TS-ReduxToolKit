@@ -15,8 +15,14 @@ const productsSlice = createSlice({
         el.id === action.payload ? { ...el, like: !el.like } : el
       );
     },
+    removeProduct: (state, action: PayloadAction<number>) => {
+      return state.filter((el) => el.id !== action.payload);
+    },
+    createProduct: (state, action: PayloadAction<any>) => {
+      state.unshift(action.payload);
+    },
   },
 });
 
-export const { setProducts, toggleLike } = productsSlice.actions;
+export const { setProducts, toggleLike, removeProduct, createProduct } = productsSlice.actions;
 export const productsReducer = productsSlice.reducer;
